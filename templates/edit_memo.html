@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Memo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Edit Memo</h2>
+
+        <!-- Form Edit Memo -->
+        <form method="POST" action="/edit/{{ memo.id }}">
+            <div class="mb-3">
+                <label for="nomor_memo" class="form-label">Nomor Memo</label>
+                <input type="text" class="form-control" id="nomor_memo" name="nomor_memo" value="{{ memo.nomor_memo }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="pembuat_memo" class="form-label">Pembuat Memo</label>
+                <input type="text" class="form-control" id="pembuat_memo" name="pembuat_memo" value="{{ memo.pembuat_memo }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="asal_memo" class="form-label">Asal Memo</label>
+                <select class="form-select" id="asal_memo" name="asal_memo" required>
+                    <option value="Seksi" {% if memo.asal_memo == 'Seksi' %}selected{% endif %}>Seksi</option>
+                    <option value="Bagian" {% if memo.asal_memo == 'Bagian' %}selected{% endif %}>Bagian</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="tujuan_memo" class="form-label">Tujuan Memo</label>
+                <input type="text" class="form-control" id="tujuan_memo" name="tujuan_memo" value="{{ memo.tujuan_memo }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="perihal_pengajuan" class="form-label">Perihal Pengajuan</label>
+                <input type="text" class="form-control" id="perihal_pengajuan" name="perihal_pengajuan" value="{{ memo.perihal_pengajuan }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="tanggal_pengajuan" class="form-label">Tanggal Pengajuan</label>
+                <input type="datetime-local" class="form-control" id="tanggal_pengajuan" name="tanggal_pengajuan" value="{{ memo.tanggal_pengajuan.isoformat() if memo.tanggal_pengajuan else '' }}">
+            </div>
+            <div class="mb-3">
+                <label for="tanggal_avp" class="form-label">Tanggal Pengiriman ke AVP</label>
+                <input type="datetime-local" class="form-control" id="tanggal_avp" name="tanggal_avp" value="{{ memo.tanggal_avp.isoformat() if memo.tanggal_avp else '' }}">
+            </div>
+            <div class="mb-3">
+                <label for="tanggal_vp" class="form-label">Tanggal Pengiriman ke VP</label>
+                <input type="datetime-local" class="form-control" id="tanggal_vp" name="tanggal_vp" value="{{ memo.tanggal_vp.isoformat() if memo.tanggal_vp else '' }}">
+            </div>
+            <div class="mb-3">
+                <label for="diterima_avp" class="form-label">Diterima di Kantor AVP</label>
+                <input type="datetime-local" class="form-control" id="diterima_avp" name="diterima_avp" value="{{ memo.diterima_avp.isoformat() if memo.diterima_avp else '' }}">
+            </div>
+            <div class="mb-3">
+                <label for="diterima_vp" class="form-label">Diterima di Kantor VP</label>
+                <input type="datetime-local" class="form-control" id="diterima_vp" name="diterima_vp" value="{{ memo.diterima_vp.isoformat() if memo.diterima_vp else '' }}">
+            </div>
+            <div class="mb-3">
+                <label for="status" class="form-label">Status</label>
+                <select class="form-select" id="status" name="status" required>
+                    <option value="Di Rekap Sekretaris" {% if memo.status == 'Di Rekap Sekretaris' %}selected{% endif %}>Di Rekap Sekretaris</option>
+                    <option value="Di Review VP" {% if memo.status == 'Di Review VP' %}selected{% endif %}>Di Review VP</option>
+                    <option value="Di Setujui VP" {% if memo.status == 'Di Setujui VP' %}selected{% endif %}>Di Setujui VP</option>
+                    <option value="Di Revisi VP" {% if memo.status == 'Di Revisi VP' %}selected{% endif %}>Di Revisi VP</option>
+                    <option value="Di Batalkan VP" {% if memo.status == 'Di Batalkan VP' %}selected{% endif %}>Di Batalkan VP</option>
+                    <option value="Di Rekap Adm Bagian" {% if memo.status == 'Di Rekap Adm Bagian' %}selected{% endif %}>Di Rekap Adm Bagian</option>
+                    <option value="Review AVP" {% if memo.status == 'Review AVP' %}selected{% endif %}>Review AVP</option>
+                    <option value="Disetujui AVP" {% if memo.status == 'Disetujui AVP' %}selected{% endif %}>Disetujui AVP</option>
+                    <option value="Di Revisi AVP" {% if memo.status == 'Di Revisi AVP' %}selected{% endif %}>Di Revisi AVP</option>
+                    <option value="Di Batalkan AVP" {% if memo.status == 'Di Batalkan AVP' %}selected{% endif %}>Di Batalkan AVP</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="tindak_lanjut" class="form-label">Tindak Lanjut</label>
+                <input type="text" class="form-control" id="tindak_lanjut" name="tindak_lanjut" value="{{ memo.tindak_lanjut }}">
+            </div>
+            <div class="mb-3">
+                <label for="pic_terkait" class="form-label">PIC Terkait</label>
+                <input type="text" class="form-control" id="pic_terkait" name="pic_terkait" value="{{ memo.pic_terkait }}">
+            </div>
+            <div class="mb-3">
+                <label for="arsip_dokumen" class="form-label">Arsip Dokumen</label>
+                <input type="text" class="form-control" id="arsip_dokumen" name="arsip_dokumen" value="{{ memo.arsip_dokumen }}">
+            </div>
+            <div class="mb-3">
+                <label for="keterangan" class="form-label">Keterangan</label>
+                <select class="form-select" id="keterangan" name="keterangan" required>
+                    <option value="Progress" {% if memo.keterangan == 'Progress' %}selected{% endif %}>Progress</option>
+                    <option value="Closed" {% if memo.keterangan == 'Closed' %}selected{% endif %}>Closed</option>
+                    <option value="Pending" {% if memo.keterangan == 'Pending' %}selected{% endif %}>Pending</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+        </form>
+    </div>
+</body>
+</html>

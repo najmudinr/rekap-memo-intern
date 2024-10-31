@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Input Memo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Input Memo</h2>
+        <form method="POST" action="/admin">
+            <div class="mb-3">
+                <label for="nomor_memo" class="form-label">Nomor Memo</label>
+                <input type="text" class="form-control" id="nomor_memo" name="nomor_memo" required>
+            </div>
+            <div class="mb-3">
+                <label for="pembuat_memo" class="form-label">Pembuat Memo</label>
+                <input type="text" class="form-control" id="pembuat_memo" name="pembuat_memo" required>
+            </div>
+            <div class="mb-3">
+                <label for="asal_memo" class="form-label">Asal Memo</label>
+                <select class="form-select" id="asal_memo" name="asal_memo" required>
+                    <option value="Seksi">Seksi</option>
+                    <option value="Bagian">Bagian</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="tujuan_memo" class="form-label">Tujuan Memo</label>
+                <input type="text" class="form-control" id="tujuan_memo" name="tujuan_memo" required>
+            </div>
+            <div class="mb-3">
+                <label for="perihal_pengajuan" class="form-label">Perihal Pengajuan</label>
+                <input type="text" class="form-control" id="perihal_pengajuan" name="perihal_pengajuan" required>
+            </div>
+            <div class="mb-3">
+                <label for="tanggal_pengajuan" class="form-label">Tanggal Pengajuan</label>
+                <input type="datetime-local" class="form-control" id="tanggal_pengajuan" name="tanggal_pengajuan">
+            </div>
+            <div class="mb-3">
+                <label for="tanggal_avp" class="form-label">Tanggal Pengiriman ke AVP</label>
+                <input type="datetime-local" class="form-control" id="tanggal_avp" name="tanggal_avp">
+            </div>
+            <div class="mb-3">
+                <label for="tanggal_vp" class="form-label">Tanggal Pengiriman ke VP</label>
+                <input type="datetime-local" class="form-control" id="tanggal_vp" name="tanggal_vp">
+            </div>
+            <div class="mb-3">
+                <label for="diterima_avp" class="form-label">Diterima di Kantor AVP</label>
+                <input type="datetime-local" class="form-control" id="diterima_avp" name="diterima_avp">
+            </div>
+            <div class="mb-3">
+                <label for="diterima_vp" class="form-label">Diterima di Kantor VP</label>
+                <input type="datetime-local" class="form-control" id="diterima_vp" name="diterima_vp">
+            </div>
+            <div class="mb-3">
+                <label for="status" class="form-label">Status</label>
+                <select class="form-select" id="status" name="status" required>
+                    <option value="Di Rekap Sekretaris">Di Rekap Sekretaris</option>
+                    <option value="Di Review VP">Di Review VP</option>
+                    <option value="Di Setujui VP">Di Setujui VP</option>
+                    <option value="Di Revisi VP">Di Revisi VP</option>
+                    <option value="Di Batalkan VP">Di Batalkan VP</option>
+                    <option value="Di Rekap Adm Bagian">Di Rekap Adm Bagian</option>
+                    <option value="Review AVP">Review AVP</option>
+                    <option value="Disetujui AVP">Disetujui AVP</option>
+                    <option value="Di Revisi AVP">Di Revisi AVP</option>
+                    <option value="Di Batalkan AVP">Di Batalkan AVP</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="tindak_lanjut" class="form-label">Tindak Lanjut</label>
+                <input type="text" class="form-control" id="tindak_lanjut" name="tindak_lanjut">
+            </div>
+            <div class="mb-3">
+                <label for="pic_terkait" class="form-label">PIC Terkait</label>
+                <input type="text" class="form-control" id="pic_terkait" name="pic_terkait">
+            </div>
+            <div class="mb-3">
+                <label for="arsip_dokumen" class="form-label">Arsip Dokumen</label>
+                <input type="text" class="form-control" id="arsip_dokumen" name="arsip_dokumen">
+            </div>
+            <div class="mb-3">
+                <label for="keterangan" class="form-label">Keterangan</label>
+                <select class="form-select" id="keterangan" name="keterangan" required>
+                    <option value="Progress">Progress</option>
+                    <option value="Closed">Closed</option>
+                    <option value="Pending">Pending</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <!-- Modal Sukses -->
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="successModalLabel">Sukses</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Memo berhasil diinput!
+                </div>
+                <div class="modal-footer">
+                    <a href="/" class="btn btn-primary">Kembali ke Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS dan jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            // Cek apakah ada parameter success dari backend
+            var success = "{{ success }}";
+            if (success === "True") {
+                // Tampilkan modal jika input berhasil
+                var successModal = new bootstrap.Modal(document.getElementById('successModal'));
+                successModal.show();
+
+                // Otomatis redirect ke dashboard setelah 3 detik
+                setTimeout(function() {
+                    window.location.href = '/';
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>
