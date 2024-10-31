@@ -2,12 +2,23 @@ import firebase_admin
 from firebase_admin import credentials, firestore
 from flask import Flask, render_template, request, redirect, url_for
 from datetime import datetime
+import os
+import base64
+import json
+
 
 app = Flask(__name__)
 
 # Path ke file credentials Firebase JSON yang diunduh
 cred = credentials.Certificate("C:/Users/ASUS/rekap-memo/firebase-credentials.json")
 firebase_admin.initialize_app(cred)
+
+#Decode JSON Credential string
+firebase_cred_json = os.getenv("FIREBASE_CREDENTIALS")
+if firebase_cred_json:
+    cred_dict = json.loads(base64.b64decode(firebase_cred_json))
+    cred = credentials.Certificate(cred_dict)
+    firebase_admin.initialize_app(cred)
 
 # Inisialisasi Firestore
 db = firestore.client()
